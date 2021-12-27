@@ -1,5 +1,6 @@
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
+import bulkSass from 'gulp-sass-bulk-importer';// @import components/* for SASS
 import rename from 'gulp-rename';
 import cleanCss from 'gulp-clean-css';// Сжатие
 import webpcss from 'gulp-webpcss';// Вывод webp изображений
@@ -16,6 +17,7 @@ export const sass = () => {
         message: "Error: <%= error.message %>"
       }))
     )
+    .pipe(bulkSass())
     .pipe(app.plugins.replace(/@img\//g, '../img/'))
     .pipe(scss({
       outputStyle: 'expanded'
