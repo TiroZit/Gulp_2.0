@@ -29,7 +29,7 @@ export const path = {
     html: `${srcFolder}/**/*.pug`,
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp,svg,ico}`,
     files: `${srcFolder}/files/**/*.*`,
-    //svgicons: `${srcFolder}/svg/**/*.svg`,
+    svgSprive: `${srcFolder}/svg/*.svg`,
   },
   clean: buildFolder,
   buildFolder: buildFolder,

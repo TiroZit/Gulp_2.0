@@ -1,3 +1,4 @@
+import svgmin from 'gulp-svgmin';
 import svgSprite from 'gulp-svg-sprite';
 
 export const svgSprive = () => {
@@ -8,15 +9,23 @@ export const svgSprive = () => {
         message: "Error: <%= error.message %>"
       }))
     )
+    .pipe(svgmin({
+			multipass: true,
+      full: true,
+      plugins: [
+        'removeDoctype',
+        'removeComments',
+        'sortAttrs',
+        'removeUselessStrokeAndFill',
+      ],
+    }))
     .pipe(svgSprite({
       mode: {
         stack: {
           sprite: `../icons/icons.svg`,
-          // Создавать страницу с перечнем иконок
-          example: false
         }
       }
     }))
-    .pipe(app.gulp.dest(`${app.path.build.images}`));
-    //.pipe(app.plugins.browsersync.stream());
+    .pipe(app.gulp.dest(`${app.path.build.images}`))
+    .pipe(app.plugins.browsersync.stream());
 }

@@ -34,15 +34,13 @@ function watcher(){
   gulp.watch(path.watch.sass, sass);
   gulp.watch(path.watch.js, js);
   gulp.watch(path.watch.images, images);
-  //gulp.watch(path.watch.svgSprive, svgSprive);
+  gulp.watch(path.watch.svgSprive, svgSprive);
 }
-
-export { svgSprive }
 
 // Последовательная обработка шрифтов 
 const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyle);
 
-const mainTasks = gulp.series(fonts, svgSprive, gulp.parallel(copy, html, sass, js, images));
+const mainTasks = gulp.series(fonts, gulp.parallel(copy, html, sass, js, images, svgSprive));
 
 // Построение сценариев выполнение задач
 const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server))
@@ -60,34 +58,34 @@ export { deployFTP }
 gulp.task('default', dev);
 
 // "devDependencies": {
-  //   "browser-sync": "^2.27.7",
-  //   "del": "^6.0.0",
-  //   "gulp": "^4.0.2",
-  //   "gulp-autoprefixer": "^8.0.0",
-  //   "gulp-clean-css": "^4.3.0",
-  //   "gulp-fonter": "^0.3.0",
-  //   "gulp-group-css-media-queries": "^1.2.2",
-  //   "gulp-htmlmin": "^5.0.1",
-  //   "gulp-if": "^3.0.0",
-  //   "gulp-imagemin": "^8.0.0",
-  //   "gulp-newer": "^1.4.0",
-  //   "gulp-notify": "^4.0.0",
-  //   "gulp-plumber": "^1.2.1",
-  //   "gulp-pug": "^5.0.0",
-  //   "gulp-rename": "^2.0.0",
-  //   "gulp-replace": "^1.1.3",
-  //   "gulp-sass": "^5.0.0",
-  //   "gulp-svg-sprite": "^1.5.0",
-  //   "gulp-ttf2woff2": "^4.0.1",
-  //   "gulp-version-number": "^0.2.4",
-  //   "gulp-webp": "^4.0.1",
-  //   "gulp-webp-html-nosvg": "^1.0.1",
-  //   "gulp-webpcss": "^1.1.1",
-  //   "gulp-zip": "^5.1.0",
-  //   "sass": "^1.45.1",
-  //   "util": "^0.12.4",
-  //   "vinyl-ftp": "^0.6.1",
-  //   "webp-converter": "2.2.3",
-  //   "webpack": "^5.65.0",
-  //   "webpack-stream": "^7.0.0"
-  // }
+//   "browser-sync": "^2.27.7",
+//   "del": "^6.0.0",
+//   "gulp": "^4.0.2",
+//   "gulp-autoprefixer": "^8.0.0",
+//   "gulp-clean-css": "^4.3.0",
+//   "gulp-fonter": "^0.3.0",
+//   "gulp-group-css-media-queries": "^1.2.2",
+//   "gulp-htmlmin": "^5.0.1",
+//   "gulp-if": "^3.0.0",
+//   "gulp-imagemin": "^8.0.0",
+//   "gulp-newer": "^1.4.0",
+//   "gulp-notify": "^4.0.0",
+//   "gulp-plumber": "^1.2.1",
+//   "gulp-pug": "^5.0.0",
+//   "gulp-rename": "^2.0.0",
+//   "gulp-replace": "^1.1.3",
+//   "gulp-sass": "^5.0.0",
+//   "gulp-svg-sprite": "^1.5.0",
+//   "gulp-ttf2woff2": "^4.0.1",
+//   "gulp-version-number": "^0.2.4",
+//   "gulp-webp": "^4.0.1",
+//   "gulp-webp-html-nosvg": "^1.0.1",
+//   "gulp-webpcss": "^1.1.1",
+//   "gulp-zip": "^5.1.0",
+//   "sass": "^1.45.1",
+//   "util": "^0.12.4",
+//   "vinyl-ftp": "^0.6.1",
+//   "webp-converter": "2.2.3",
+//   "webpack": "^5.65.0",
+//   "webpack-stream": "^7.0.0"
+// }

@@ -32,6 +32,7 @@
     "gulp-sass": "latest",
     "gulp-sass-bulk-importer": "^3.0.2",
     "gulp-svg-sprite": "latest",
+    "gulp-svgmin": "^4.1.0",
     "gulp-ttf2woff2": "latest",
     "gulp-version-number": "latest",
     "gulp-webp": "latest",
