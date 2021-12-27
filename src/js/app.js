@@ -23,6 +23,4 @@ Functions.isWebp();
 // FOCUS-VISIBLE
 // npm install --save focus-visible
 
-//import focusVisible from "focus-visible";
-
-//lazy-loading.lazy();
+import focusVisible from "focus-visible";

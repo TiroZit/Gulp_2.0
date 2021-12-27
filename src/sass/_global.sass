@@ -22,6 +22,9 @@ a
 [class*=__container]
   position: relative
   @include container("", "10px")
+
 // Фокус с помощью клавиатуры
+.js-focus-visible :focus-visible
+  outline: -webkit-focus-ring-color auto 1px
 .js-focus-visible :focus:not(.focus-visible)
   outline: none
