@@ -9,6 +9,14 @@ export const js = () => {
       }))
     )
     .pipe(webpack({
+      module: {
+        rules: [
+          {
+            test: /\.css$/i,
+            use: ["style-loader", "css-loader"],
+          },
+        ],
+      },
       mode: app.isBuild ? 'production' : 'development',
       output: {
         filename: 'app.min.js',
