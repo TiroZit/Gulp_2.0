@@ -1,5 +1,5 @@
-extends html/_base
-include html/_mixins
+extends _html/_base
+include _html/_mixins
 block vars
 	- var lang = ''
 	- var type = ''
@@ -18,7 +18,7 @@ block vars
 	- var dark = ''
 block content
 	._wrapper
-		include html/_header
+		include _html/_header
 		main.main 
-		include html/_footer
+		include _html/_footer
 	script(src="js/app.min.js")

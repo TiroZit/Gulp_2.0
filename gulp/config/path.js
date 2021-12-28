@@ -15,17 +15,17 @@ export const path = {
     files: `${buildFolder}/files/`
   },
   src: {
-    js: `${srcFolder}/js/app.js`,
+    js: `${srcFolder}/_js/app.js`,
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp}`,
     svg: `${srcFolder}/img/**/*.svg`,
-    sass: `${srcFolder}/sass/style.scss`,
+    sass: `${srcFolder}/_sass/style.scss`,
     html: `${srcFolder}/*.pug`,
     files: `${srcFolder}/files/**/*.*`,
     svgicons: `${srcFolder}/svg/*.svg`,
   },
   watch: {
-    js: `${srcFolder}/js/**/*.js`,
-    sass: `${srcFolder}/sass/**/*.{sass,scss}`,
+    js: `${srcFolder}/_js/**/*.js`,
+    sass: `${srcFolder}/_sass/**/*.{sass,scss}`,
     html: `${srcFolder}/**/*.pug`,
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp,svg,ico}`,
     files: `${srcFolder}/files/**/*.*`,
