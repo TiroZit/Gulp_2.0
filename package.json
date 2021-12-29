@@ -50,6 +50,12 @@
   "dependencies": {
     "swiper": "latest",
     "vanilla-lazyload": "latest",
+    "nouislider": "latest",
+    "aos@next": "latest",
+    "simplebar": "latest",
+    "choices.js": "latest",
+    "accordion-js": "latest",
+    "@fancyapps/ui": "latest",
     "focus-visible": "latest"
   }
 }
