@@ -1,4 +1,4 @@
-export function Tabs(){
+export function Modal(){
 	class GraphModal {
 		constructor(options) {
 			let defaultOptions = {

@@ -51,7 +51,7 @@
     "swiper": "latest",
     "vanilla-lazyload": "latest",
     "nouislider": "latest",
-    "aos@next": "latest",
+    "aos": "latest",
     "simplebar": "latest",
     "choices.js": "latest",
     "accordion-js": "latest",
