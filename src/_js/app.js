@@ -9,13 +9,10 @@ Functions.isWebp();
 // import * as Modal from './modules/modal.js';
 // Modal.Modal();
 
-// SWIPER
-// import Swiper, { Navigation, Pagination } from 'swiper';
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
+// SWIPER 
+// https://swiperjs.com/swiper-api
 
-//sliders.sliderMain();
+//import './modules/sliders.js'
 
 // LAZY-LOADING
 // import lazyLoad from "vanilla-lazyload";
