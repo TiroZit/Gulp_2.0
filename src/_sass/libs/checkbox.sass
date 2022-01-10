@@ -1,0 +1,37 @@
+// Кастомные чекбоксы
+// https://github.com/pepelsbey/playground/tree/main/14
+
+// PUG разметка
+// label.check.option
+//   input.check__input(type="checkbox")
+//   span.check__box // Кастомный чекбокс
+//     |Первый
+
+// Скрываем чекбокс
+.check
+  padding-left: 1.2em
+.check__input
+  position: absolute
+  appearance: none
+
+// Кастомный чекбокс
+.check__box
+  position: absolute
+  margin-left: -1.2em
+  width: 1em
+  height: 1em
+
+// Активный
+.check__input:checked + .check__box
+
+// Фокус
+.check__input:focus + .check__box
+
+// Фокус активного
+.check__input:checked:focus + .check__box
+
+// Отлюкченный
+.check__input:disabled + .check__box
+
+// Отлюкченный активный
+.check__input:checked:disabled + .check__box
