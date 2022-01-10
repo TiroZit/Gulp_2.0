@@ -2,21 +2,25 @@ import * as Functions from './modules/functions.js';
 
 Functions.isWebp();
 
-//Tabbis https://github.com/jenstornell/tabbis.js
-// import * as Tabs from './modules/tabbis.es6.js';
-// Tabs.Tabs();
+// BURGER
+//import './modules/burger.js'
 
-// import * as Modal from './modules/modal.js';
-// Modal.Modal();
+// MODAL
+//import './modules/modal.js'
+
+// DYNAMICADAPT
+//import './modules/dynamic-responsive.js'
+
+// Tabbis 
+// https://github.com/jenstornell/tabbis.js
+//import './modules/tabbis.es6.js'
 
 // SWIPER 
 // https://swiperjs.com/swiper-api
-
 //import './modules/sliders.js'
 
 // LAZY-LOADING
-// import lazyLoad from "vanilla-lazyload";
-// lazy-loading.lazy();
+//import './modules/lazy-loading.js'
 
 // NOUISLIDER
 // import * as noUiSlider from 'nouislider';

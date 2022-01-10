@@ -1,4 +1,4 @@
-export function Modal(){
+function initModal(){
 	class GraphModal {
 		constructor(options) {
 			let defaultOptions = {
@@ -185,3 +185,16 @@ export function Modal(){
 		}
 	}
 }
+
+window.addEventListener('load', function(e){
+  initModal();
+});
+// const modal = new Modal({
+// 	isOpen: (modal) => {
+// 		console.log(modal);
+// 		console.log('opened');
+// 	},
+// 	isClose: () => {
+// 		console.log('closed');
+// 	},
+// });

@@ -3,7 +3,7 @@
 // e.x. data-da=".item,992,2"
 // Andrikanych Yevhen 2020
 // https://www.youtube.com/c/freelancerlifestyle
-export function dynamic(){
+function initDynamicAdapt(){
   "use strict";
   function DynamicAdapt(type) {
     this.type = type;
@@ -158,3 +158,7 @@ export function dynamic(){
   const da = new DynamicAdapt("max");
   da.init();
 }
+
+window.addEventListener('load', function(e){
+  initDynamicAdapt();
+});
