@@ -28,7 +28,6 @@ export const svgSprive = () => {
           $('[style]').removeAttr('style');
           $('[width]').removeAttr('width');
           $('[height]').removeAttr('height');
-          $('[class]').removeAttr('class');
         },
         parserOptions: {
           xmlMode: true
