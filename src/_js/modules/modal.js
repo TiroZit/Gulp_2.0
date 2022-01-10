@@ -86,8 +86,12 @@ export function Modal(){
 	
 			this.modal.style.setProperty('--transition-time', `${this.speed / 1000}s`);
 			this.modal.classList.add('is-open');
+	
+			document.body.style.scrollBehavior = 'auto';
+			document.documentElement.style.scrollBehavior = 'auto';
+	
 			this.disableScroll();
-			
+	
 			this.modalContainer.classList.add('modal-open');
 			this.modalContainer.classList.add(this.animation);
 			
@@ -107,6 +111,10 @@ export function Modal(){
 				this.modalContainer.classList.remove('modal-open');
 				
 				this.enableScroll();
+	
+				document.body.style.scrollBehavior = 'auto';
+				document.documentElement.style.scrollBehavior = 'auto';
+	
 				this.options.isClose(this);
 				this.isOpen = false;
 				this.focusTrap();
