@@ -34,6 +34,7 @@
     "gulp-svg-sprite": "latest",
     "gulp-svgmin": "^4.1.0",
     "gulp-ttf2woff2": "latest",
+    "gulp-cheerio": "latest",
     "gulp-group-css-media-queries": "latest",
     "gulp-version-number": "latest",
     "gulp-webp": "latest",
