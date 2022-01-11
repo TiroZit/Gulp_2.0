@@ -18,7 +18,8 @@ $maxWidthContainer: 1320
   @else
     // Всегда
     #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}))
-@mixin container($max-width:"120rem", $padding:"2rem")
+@mixin container($max-width, $padding)
+  box-sizing: content-box
   width: 100%
   max-width: #{$max-width}
   padding: 0 #{$padding}
