@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "gulp",
     "build": "gulp build --build",
+    "npm": "npm install",
     "zip": "gulp deployZIP --build",
     "ftp": "gulp deployFTP --build"
   },
