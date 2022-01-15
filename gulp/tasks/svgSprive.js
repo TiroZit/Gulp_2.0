@@ -23,8 +23,6 @@ export const svgSprive = () => {
     .pipe(
       cheerio({
         run: function ($) {
-          $('[fill]').removeAttr('fill');
-          $('[stroke]').removeAttr('stroke');
           $('[style]').removeAttr('style');
           $('[width]').removeAttr('width');
           $('[height]').removeAttr('height');
@@ -35,12 +33,37 @@ export const svgSprive = () => {
       })
     )
     .pipe(svgSprite({
-      mode: {
-        stack: {
-          sprite: `../icons/icons.svg`,
-        }
-      }
-    }))
+			mode: {
+				symbol: {
+					sprite: '../img/icons/icons.svg',
+					//example: true
+				}
+			},
+			shape: {
+				id: {
+					separator: '',
+					generator: 'svg-'
+				},
+				transform: [
+					{
+						svgo: {
+							plugins: [
+								{ removeXMLNS: true },
+								{ convertPathData: false },
+								{ removeViewBox: false },
+							]
+						}
+					}
+				]
+			},
+			svg: {
+				rootAttributes: {
+					style: 'display: none;',
+					'aria-hidden': true
+				},
+				xmlDeclaration: false
+			}
+		}))
     .pipe(app.gulp.dest(`${app.path.build.images}`))
     .pipe(app.plugins.browsersync.stream());
 }
