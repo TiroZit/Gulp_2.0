@@ -1,4 +1,4 @@
-import webpHtmlNosvg from 'gulp-webp-html-nosvg';
+import webpHtmlNosvg from 'gulp-webp-avif-html';
 import versionNumber from 'gulp-version-number';
 import pug from 'gulp-pug';
 import htmlmin from 'gulp-htmlmin';

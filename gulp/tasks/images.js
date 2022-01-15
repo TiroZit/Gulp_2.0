@@ -1,4 +1,4 @@
-import webp from 'gulp-webp';
+import squoosh from 'gulp-libsquoosh';
 import imagemin from 'gulp-imagemin';
 
 export const images = () => {
@@ -13,7 +13,10 @@ export const images = () => {
     .pipe(
       app.plugins.if(
         app.isBuild,
-        webp()
+        squoosh({
+					avif: {},
+					webp: {},
+				})
       )
     )
     .pipe(
