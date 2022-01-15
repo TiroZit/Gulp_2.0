@@ -19,7 +19,7 @@
     "gulp": "latest",
     "gulp-autoprefixer": "latest",
     "gulp-clean-css": "latest",
-    "gulp-fonter": "latest",
+    "gulp-fonter-fix": "latest",
     "gulp-htmlmin": "latest",
     "gulp-if": "latest",
     "gulp-imagemin": "latest",
