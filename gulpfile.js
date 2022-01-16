@@ -80,7 +80,7 @@ gulp.task('default', dev);
 //   "gulp-version-number": "^0.2.4",
 //   "gulp-webp": "^4.0.1",
 //   "gulp-webp-html-nosvg": "^1.0.1",
-//   "gulp-webpcss": "^1.1.1",
+//   "gulp-avif-css": "^1.1.1",
 //   "gulp-zip": "^5.1.0",
 //   "sass": "^1.45.1",
 //   "util": "^0.12.4",
