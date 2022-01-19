@@ -15,8 +15,8 @@ body {
 	min-width: $minWidth + px;
 }
 body {
-	color: var(--color-text);
-	background-color: var(--color-background);
+	color: var(--colorBlack);
+	background-color: var(--colorWhite);
 	line-height: 1;
 	font-family: $fontFamily;
 	font-size: $fontSize;
@@ -32,6 +32,7 @@ button,
 textarea {
 	font-family: $fontFamily;
 	font-size: inherit;
+	color: inherit;
 }
 button {
 	cursor: pointer;
