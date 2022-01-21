@@ -55,9 +55,10 @@
     "nouislider": "latest",
     "aos": "latest",
     "simplebar": "latest",
-    "choices.js": "latest",
-    "accordion-js": "latest",
-    "@fancyapps/ui": "latest",
+    "smooth-scroll": "latest",
+    "tippy.js": "latest",
+    "inputmask": "latest",
+		"lightgallery": "latest",
     "focus-visible": "latest"
   }
 }
