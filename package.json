@@ -40,6 +40,7 @@
     "gulp-libsquoosh": "latest",
     "gulp-webp-avif-html": "latest",
     "gulp-avif-css": "latest",
+    "gulp-typograf": "latest",
     "gulp-zip": "latest",
     "sass": "latest",
     "style-loader": "^3.3.1",
