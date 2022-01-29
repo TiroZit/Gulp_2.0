@@ -13,8 +13,8 @@ body {
 	min-width: $minWidth + px;
 }
 body {
-	color: var(--colorBlack);
-	background-color: var(--colorWhite);
+	color: var(--c-black);
+	background-color: var(--c-white);
 	line-height: 1;
 	font-family: $fontFamily;
 	font-size: $fontSize;
