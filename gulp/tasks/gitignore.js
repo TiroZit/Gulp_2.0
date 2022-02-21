@@ -3,6 +3,7 @@ export const gitignore = () => {
 	if (!fs.existsSync('.gitignore')) {
 		fs.writeFile('./.gitignore', '', cb);
 		fs.appendFile('./.gitignore', 'package-lock.json\r\n', cb);
+		fs.appendFile('./.gitignore', '.idea\r\n', cb);
 		fs.appendFile('./.gitignore', '/gulp/config/ftp.js\r\n', cb);
 		fs.appendFile('./.gitignore', 'node_modules/\r\n', cb);
 		fs.appendFile('./.gitignore', '.gitignore\r\n', cb);
