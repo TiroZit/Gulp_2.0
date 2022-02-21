@@ -13,8 +13,8 @@ body {
 	min-width: $minWidth + px;
 }
 body {
-	color: var(--c-black);
-	background-color: var(--c-white);
+	color: var(--colorWhite);
+	background-color: var(--colorBlack);
 	line-height: 1;
 	font-family: $fontFamily;
 	font-size: $fontSize;
@@ -47,11 +47,13 @@ a:visited {
 a:hover {
 	text-decoration: none;
 }
-ul{
+ul,
+ol{
 	list-style: none;
 }
 img {
 	vertical-align: top;
+	object-fit: cover;
 }
 h1,
 h2,
