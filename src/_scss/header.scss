@@ -1,52 +1,61 @@
-//Burger
-// .menu-open .burger{
-// 	transform: translateX(200px);
-// 	z-index: 6;
+// Burger
+// .menu-open .burger {
+//   transform: translateX(200px);
+//   z-index: 6;
 // }
+
 // .burger {
-// 	display: none;
-// 	@media (max-width: $tablet) {
-// 		display: block;
-// 		position: relative;
-// 		width: 30px;
-// 		height: 18px;
-// 		transition: all 0.5s ease 0s;
-// 		transform: translateX(0);
-// 		cursor: pointer;
-// 		z-index: 3;
-// 		margin-right: auto;
-// 		span,
-// 		&::before,
-// 		&::after {
-// 			content: "";
-// 			transition: all 0.7s ease 0s;
-// 			left: 0px;
-// 			position: absolute;
-// 			width: 100%;
-// 			height: 1px;
-// 			background-color: var(--colorTurquoise);
-// 		}
-// 		&::before {
-// 			top: 0px;
-// 		}
-// 		&::after {
-// 			bottom: 0px;
-// 		}
-// 		span {
-// 			top: calc(50% - 1px);
-// 		}
-// 		.menu-open & {
-// 			span {
-// 				transform: scale(0);
-// 			}
-// 			&::before {
-// 				transform: rotate(-45deg);
-// 				top: calc(50% - 0.5px);
-// 			}
-// 			&::after {
-// 				transform: rotate(45deg);
-// 				bottom: calc(50% - 1px);
-// 			}
-// 		}
-// 	}
+//   display: none;
+
+//   @media (max-width: $tablet) {
+//     display: block;
+//     position: relative;
+//     width: 30px;
+//     height: 18px;
+//     transition: all 0.5s ease 0s;
+//     transform: translateX(0);
+//     cursor: pointer;
+//     z-index: 3;
+//     margin-right: auto;
+
+//     span,
+//     &::before,
+//     &::after {
+//       content: "";
+//       transition: all 0.7s ease 0s;
+//       left: 0px;
+//       position: absolute;
+//       width: 100%;
+//       height: 1px;
+//       background-color: var(--colorTurquoise);
+//     }
+
+//     &::before {
+//       top: 0px;
+//     }
+
+//     &::after {
+//       bottom: 0px;
+//     }
+
+//     span {
+//       top: calc(50% - 1px);
+//     }
+
+//     .menu-open & {
+//       span {
+//         transform: scale(0);
+//       }
+
+//       &::before {
+//         transform: rotate(-45deg);
+//         top: calc(50% - 0.5px);
+//       }
+
+//       &::after {
+//         transform: rotate(45deg);
+//         bottom: calc(50% - 1px);
+//       }
+//     }
+//   }
 // }
