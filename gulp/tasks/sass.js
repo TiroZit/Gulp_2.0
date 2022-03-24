@@ -1,5 +1,6 @@
 import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
+import bulkSass from 'gulp-sass-bulk-importer';// @import components/* for SASS
 import rename from 'gulp-rename';
 import cleanCss from 'gulp-clean-css';// Сжатие
 import webpcss from 'gulp-avif-css';// Вывод webp изображений
@@ -30,21 +31,18 @@ export const sass = () => {
     .pipe(
       app.plugins.if(
         app.isBuild,
-        webpcss({
-          webpClass: '.webp',
-          noWebpClass: '.no-webp'
-        })
+        webpcss()
       )
     )
     .pipe(
       app.plugins.if(
         app.isBuild,
         autoprefixer({
-          grid: false,
-          flexbox: false,
           overrideBrowserslist: ["last 3 versions"],
-          cascade: true
-        })    
+          cascade: true,
+          grid: false,
+          flexbox: false
+        })
       )
     )
     .pipe(app.gulp.dest(app.path.build.css)) // Выгрузка не сжатого
