@@ -42,7 +42,8 @@ export function fullVHfix() {
 		fixHeight();
 	}
 }
-// Вспомогательные модули плавного расскрытия и закрытия объекта ======================================================================================================================================================================
+// Вспомогательные модули плавного расскрытия и закрытия объекта
+
 export let _slideUp = (target, duration = 500, showmore = 0) => {
 	if (!target.classList.contains('_slide')) {
 		target.classList.add('_slide');
@@ -118,7 +119,8 @@ export let _slideToggle = (target, duration = 500) => {
 		return _slideUp(target, duration);
 	}
 }
-// Вспомогательные модули блокировки прокрутки и скочка ====================================================================================================================================================================================================================================================================================
+// Вспомогательные модули блокировки прокрутки и скочка
+
 export let bodyLockStatus = true;
 export let bodyLockToggle = (delay = 500) => {
 	if (document.documentElement.classList.contains('lock')) {
@@ -162,9 +164,9 @@ export let bodyLock = (delay = 500) => {
 		}, delay);
 	}
 }
-// Модуль работы со спойлерами =======================================================================================================================================================================================================================
+// Модуль работы со спойлерами
+
 /*
-Документация по работе в шаблоне: https://template.fls.guru/template-docs/modul-spojlery.html
 Сниппет (HTML): spollers
 */
 export function spollers() {
@@ -264,139 +266,267 @@ export function spollers() {
 		}
 	}
 }
-// Модуь работы с табами =======================================================================================================================================================================================================================
+// Модуь работы с табами
+
 /*
-Документация по работе в шаблоне: https://template.fls.guru/template-docs/modul-taby.html
+Документация: https://github.com/jenstornell/tabbis.js
 Сниппет (HTML): tabs
 */
 export function tabs() {
-	const tabs = document.querySelectorAll('[data-tabs]');
-	let tabsActiveHash = [];
-
-	if (tabs.length > 0) {
-		const hash = getHash();
-		if (hash && hash.startsWith('tab-')) {
-			tabsActiveHash = hash.replace('tab-', '').split('-');
+    class tabbisClass {
+		init(options) {
+			this.thisOptions(options);
+			this.thisMemory();
+			this.setup();
 		}
-		tabs.forEach((tabsBlock, index) => {
-			tabsBlock.classList.add('_tab-init');
-			tabsBlock.setAttribute('data-tabs-index', index);
-			tabsBlock.addEventListener("click", setTabsAction);
-			initTabs(tabsBlock);
-		});
-
-		// Получение слойлеров с медиа запросами
-		let mdQueriesArray = dataMediaQueries(tabs, "tabs");
-		if (mdQueriesArray && mdQueriesArray.length) {
-			mdQueriesArray.forEach(mdQueriesItem => {
-				// Событие
-				mdQueriesItem.matchMedia.addEventListener("change", function () {
-					setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+	
+		// Setup
+		setup() {
+			const panes = document.querySelectorAll(this.options.paneGroup);
+			const tabs = document.querySelectorAll(this.options.tabGroup);
+	
+			tabs.forEach((tabGroups, groupIndex) => {
+				const paneGroups = panes[groupIndex];
+				const activeIndex = this.getActiveIndex(tabGroups, groupIndex);
+	
+				tabGroups.setAttribute('role', 'tablist');
+	
+				// Reset items
+				this.resetTabs([ ...tabGroups.children ]);
+				this.resetPanes([ ...paneGroups.children ]);
+	
+				[ ...tabGroups.children ].forEach((tabItem, tabIndex) => {
+					const paneItem = paneGroups.children[tabIndex];
+	
+					// Add attributes
+					this.addTabAttributes(tabItem, groupIndex);
+					this.addPaneAttributes(tabItem, paneItem);
+	
+					tabItem.groupIndex = groupIndex;
+	
+					// Trigger event
+					tabItem.addEventListener(this.options.trigger, (e) => {
+						this.activate(e.currentTarget, tabItem.groupIndex);
+					});
+	
+					// Key event
+					if (this.options.keyboardNavigation) {
+						tabItem.addEventListener('keydown', (e) => {
+							this.eventKey(e);
+						});
+					}
 				});
-				setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-			});
-		}
-	}
-	// Установка позиций заголовков
-	function setTitlePosition(tabsMediaArray, matchMedia) {
-		tabsMediaArray.forEach(tabsMediaItem => {
-			tabsMediaItem = tabsMediaItem.item;
-			let tabsTitles = tabsMediaItem.querySelector('[data-tabs-titles]');
-			let tabsTitleItems = tabsMediaItem.querySelectorAll('[data-tabs-title]');
-			let tabsContent = tabsMediaItem.querySelector('[data-tabs-body]');
-			let tabsContentItems = tabsMediaItem.querySelectorAll('[data-tabs-item]');
-			tabsTitleItems = Array.from(tabsTitleItems).filter(item => item.closest('[data-tabs]') === tabsMediaItem);
-			tabsContentItems = Array.from(tabsContentItems).filter(item => item.closest('[data-tabs]') === tabsMediaItem);
-			tabsContentItems.forEach((tabsContentItem, index) => {
-				if (matchMedia.matches) {
-					tabsContent.append(tabsTitleItems[index]);
-					tabsContent.append(tabsContentItem);
-					tabsMediaItem.classList.add('_tab-spoller');
-				} else {
-					tabsTitles.append(tabsTitleItems[index]);
-					tabsMediaItem.classList.remove('_tab-spoller');
+	
+				if (activeIndex !== null) {
+					this.activateTab([ ...tabGroups.children ][activeIndex]);
+					this.activatePane([ ...paneGroups.children ][activeIndex]);
 				}
 			});
-		});
-	}
-	// Работа с контентом
-	function initTabs(tabsBlock) {
-		let tabsTitles = tabsBlock.querySelectorAll('[data-tabs-titles]>*');
-		let tabsContent = tabsBlock.querySelectorAll('[data-tabs-body]>*');
-		const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-		const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
-
-		if (tabsActiveHashBlock) {
-			const tabsActiveTitle = tabsBlock.querySelector('[data-tabs-titles]>._tab-active');
-			tabsActiveTitle ? tabsActiveTitle.classList.remove('_tab-active') : null;
 		}
-		if (tabsContent.length) {
-			tabsContent = Array.from(tabsContent).filter(item => item.closest('[data-tabs]') === tabsBlock);
-			tabsTitles = Array.from(tabsTitles).filter(item => item.closest('[data-tabs]') === tabsBlock);
-			tabsContent.forEach((tabsContentItem, index) => {
-				tabsTitles[index].setAttribute('data-tabs-title', '');
-				tabsContentItem.setAttribute('data-tabs-item', '');
-
-				if (tabsActiveHashBlock && index == tabsActiveHash[1]) {
-					tabsTitles[index].classList.add('_tab-active');
-				}
-				tabsContentItem.hidden = !tabsTitles[index].classList.contains('_tab-active');
-			});
-		}
-	}
-	function setTabsStatus(tabsBlock) {
-		let tabsTitles = tabsBlock.querySelectorAll('[data-tabs-title]');
-		let tabsContent = tabsBlock.querySelectorAll('[data-tabs-item]');
-		const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-		function isTabsAnamate(tabsBlock) {
-			if (tabsBlock.hasAttribute('data-tabs-animate')) {
-				return tabsBlock.dataset.tabsAnimate > 0 ? Number(tabsBlock.dataset.tabsAnimate) : 500;
+	
+		// Event key
+		eventKey(e) {
+			if ([ 13, 37, 38, 39, 40 ].includes(e.keyCode)) {
+				e.preventDefault();
+			}
+	
+			if (e.keyCode == 13) {
+				e.currentTarget.click();
+			} else if ([ 39, 40 ].includes(e.keyCode)) {
+				this.step(e, 1);
+			} else if ([ 37, 38 ].includes(e.keyCode)) {
+				this.step(e, -1);
 			}
 		}
-		const tabsBlockAnimate = isTabsAnamate(tabsBlock);
-		if (tabsContent.length > 0) {
-			const isHash = tabsBlock.hasAttribute('data-tabs-hash');
-			tabsContent = Array.from(tabsContent).filter(item => item.closest('[data-tabs]') === tabsBlock);
-			tabsTitles = Array.from(tabsTitles).filter(item => item.closest('[data-tabs]') === tabsBlock);
-			tabsContent.forEach((tabsContentItem, index) => {
-				if (tabsTitles[index].classList.contains('_tab-active')) {
-					if (tabsBlockAnimate) {
-						_slideDown(tabsContentItem, tabsBlockAnimate);
-					} else {
-						tabsContentItem.hidden = false;
-					}
-					if (isHash && !tabsContentItem.closest('.popup')) {
-						setHash(`tab-${tabsBlockIndex}-${index}`);
-					}
-				} else {
-					if (tabsBlockAnimate) {
-						_slideUp(tabsContentItem, tabsBlockAnimate);
-					} else {
-						tabsContentItem.hidden = true;
-					}
-				}
+	
+		// Index
+		index(el) {
+			return [ ...el.parentElement.children ].indexOf(el);
+		}
+	
+		// Step
+		step(e, direction) {
+			const children = e.currentTarget.parentElement.children;
+			this.resetTabindex(children);
+	
+			let el = children[this.pos(e.currentTarget, children, direction)];
+			el.focus();
+			el.setAttribute('tabindex', 0);
+		}
+	
+		resetTabindex(children) {
+			[ ...children ].forEach((child) => {
+				child.setAttribute('tabindex', '-1');
 			});
 		}
-	}
-	function setTabsAction(e) {
-		const el = e.target;
-		if (el.closest('[data-tabs-title]')) {
-			const tabTitle = el.closest('[data-tabs-title]');
-			const tabsBlock = tabTitle.closest('[data-tabs]');
-			if (!tabTitle.classList.contains('_tab-active') && !tabsBlock.querySelector('._slide')) {
-				let tabActiveTitle = tabsBlock.querySelectorAll('[data-tabs-title]._tab-active');
-				tabActiveTitle.length ? tabActiveTitle = Array.from(tabActiveTitle).filter(item => item.closest('[data-tabs]') === tabsBlock) : null;
-				tabActiveTitle.length ? tabActiveTitle[0].classList.remove('_tab-active') : null;
-				tabTitle.classList.add('_tab-active');
-				setTabsStatus(tabsBlock);
+	
+		// Pos
+		pos(tab, children, direction) {
+			let pos = this.index(tab);
+			pos += direction;
+	
+			if (children.length <= pos) {
+				pos = 0;
+			} else if (pos == -1) {
+				pos = children.length - 1;
 			}
-			e.preventDefault();
+	
+			return pos;
+		}
+	
+		// Emit event
+		emitEvent(tab, pane) {
+			let event = new CustomEvent('tabbis', {
+				bubbles: true,
+				detail: {
+					tab: tab,
+					pane: pane
+				}
+			});
+	
+			tab.dispatchEvent(event);
+		}
+	
+		// Set active
+		getActiveIndex(groupTabs, groupIndex) {
+			const memory = this.loadMemory(groupIndex);
+	
+			if (typeof memory !== 'undefined') {
+				return memory;
+			} else {
+				let element = groupTabs.querySelector(this.options.tabActive);
+	
+				if (!element) {
+					element = groupTabs.querySelector('[aria-selected="true"]');
+				}
+	
+				if (element) {
+					return this.index(element);
+				} else if (this.options.tabActiveFallback !== false) {
+					return this.options.tabActiveFallback;
+				} else {
+					return null;
+				}
+			}
+		}
+	
+		// ATTRIBUTES
+	
+		// Add tab attributes
+		addTabAttributes(tab, groupIndex) {
+			const tabIndex = this.index(tab);
+			const prefix = this.options.prefix;
+	
+			tab.setAttribute('role', 'tab');
+			tab.setAttribute('aria-controls', `${prefix}tabpanel-${groupIndex}-${tabIndex}`);
+			tab.setAttribute('id', `${prefix}tab-${groupIndex}-${tabIndex}`);
+		}
+	
+		// Add tabpanel attributes
+		addPaneAttributes(tab, pane) {
+			pane.setAttribute('role', 'tabpanel');
+			pane.setAttribute('aria-labelledby', tab.getAttribute('id'));
+			pane.setAttribute('id', tab.getAttribute('aria-controls'));
+			pane.setAttribute('tabindex', '0');
+		}
+	
+		// Activate
+		activate(tab, i) {
+			const pane = document.querySelector(`#${tab.getAttribute('aria-controls')}`);
+	
+			this.resetTabs([ ...tab.parentNode.children ]);
+			this.resetPanes([ ...pane.parentElement.children ]);
+	
+			this.activateTab(tab);
+			this.activatePane(pane);
+	
+			this.saveMemory(tab, i);
+	
+			this.emitEvent(tab, pane);
+		}
+	
+		// Activate tab
+		activateTab(tab) {
+			tab.setAttribute('aria-selected', 'true');
+			tab.setAttribute('tabindex', '0');
+		}
+	
+		// Activate pane
+		activatePane(pane) {
+			pane.removeAttribute('hidden');
+		}
+	
+		// Remove tab attributes
+		resetTabs(tabs) {
+			tabs.forEach((el) => el.setAttribute('aria-selected', 'false'));
+			this.resetTabindex(tabs);
+		}
+	
+		// Reset pane attributes
+		resetPanes(panes) {
+			panes.forEach((el) => el.setAttribute('hidden', ''));
+		}
+	
+		// MEMORY
+	
+		// Load memory
+		loadMemory(groupIndex) {
+			if (!this.options.memory) return;
+			if (typeof this.memory[groupIndex] === 'undefined') return;
+			if (this.memory[groupIndex] === null) return;
+	
+			return parseInt(this.memory[groupIndex]);
+		}
+	
+		// Save memory
+		saveMemory(tab, groupIndex) {
+			if (!this.options.memory) return;
+			this.memory[groupIndex] = this.index(tab);
+			localStorage.setItem(this.options.memory, JSON.stringify(this.memory));
+		}
+	
+		// This memory
+		thisMemory() {
+			if (!this.options.memory) return;
+			const store = localStorage.getItem(this.options.memory);
+			this.memory = store !== null ? JSON.parse(store) : [];
+		}
+	
+		// OPTIONS
+	
+		// Defaults
+		defaults() {
+			return {
+				keyboardNavigation: true,
+				memory: false,
+				paneGroup: '[data-panes]',
+				prefix: '',
+				tabActive: '[data-active]',
+				tabActiveFallback: 0,
+				tabGroup: '[data-tabs]',
+				trigger: 'click'
+			};
+		}
+	
+		// This options
+		thisOptions(options) {
+			this.options = Object.assign(this.defaults(), options);
+			if (this.options.memory !== true) return;
+			this.options.memory = 'tabbis';
 		}
 	}
+	
+	// Function call
+	function tabbis(options = {}) {
+		const tabs = new tabbisClass();
+		tabs.init(options);
+    }
+    // Инициализация
+	tabbis();
 }
-// Модуль работы с меню (бургер) =======================================================================================================================================================================================================================
+// Модуль работы с меню (бургер)
+
 /*
-Документация по работе в шаблоне: https://template.fls.guru/template-docs/menu-burger.html
 Сниппет (HTML): menu
 */
 export function menuInit() {
@@ -417,9 +547,9 @@ export function menuClose() {
 	bodyUnlock();
 	document.documentElement.classList.remove("menu-open");
 }
-// Модуль "показать еще" =======================================================================================================================================================================================================================
+// Модуль "показать еще"
+
 /*
-Документация по работе в шаблоне: https://template.fls.guru/template-docs/modul-pokazat-eshhjo.html
 Сниппет (HTML): showmore
 */
 export function showMore() {
@@ -532,9 +662,8 @@ export function showMore() {
 		}
 	});
 }
-//================================================================================================================================================================================================================================================================================================================
-// Прочие полезные функции ================================================================================================================================================================================================================================================================================================================
-//================================================================================================================================================================================================================================================================================================================
+// Прочие полезные функции
+
 // FLS (Full Logging System)
 export function FLS(message) {
 	setTimeout(() => {
@@ -617,4 +746,3 @@ export function dataMediaQueries(array, dataSetValue) {
 		}
 	}
 }
-//================================================================================================================================================================================================================================================================================================================
