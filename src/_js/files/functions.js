@@ -25,7 +25,7 @@ export function addLoadedClass() {
 export function getHash() {
 	if (location.hash) { return location.hash.replace('#', ''); }
 }
-// Указание хеша в адресе сайта
+// Указание хеша в адресе сайта.
 export function setHash(hash) {
 	hash = hash ? `#${hash}` : window.location.href.split('#')[0];
 	history.pushState('', '', hash);
