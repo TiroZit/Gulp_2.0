@@ -5,6 +5,8 @@ export const gitignore = () => {
 		fs.appendFile('./.gitignore', 'package-lock.json\r\n', cb);
 		fs.appendFile('./.gitignore', '/gulp/config/ftp.js\r\n', cb);
 		fs.appendFile('./.gitignore', 'node_modules/\r\n', cb);
+		fs.appendFile('./.gitignore', 'dist/\r\n', cb);
+		fs.appendFile('./.gitignore', '.publish/\r\n', cb);
 		fs.appendFile('./.gitignore', '.gitignore\r\n', cb);
 		fs.appendFile('./.gitignore', 'version.json\r\n', cb);
 		fs.appendFile('./.gitignore', 'README.md\r\n', cb);

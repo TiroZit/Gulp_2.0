@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "gulp",
     "build": "gulp build --build",
+    "deployGH": "gulp deployGH --build",
     "npm": "npm install",
     "zip": "gulp deployZIP --build",
     "ftp": "gulp deployFTP --build"
@@ -17,6 +18,7 @@
     "browser-sync": "latest",
     "css-loader": "^6.5.1",
     "del": "latest",
+    "gh-pages": "^3.2.3",
     "gulp": "latest",
     "gulp-autoprefixer": "latest",
     "gulp-avif-css": "^1.0.3",
